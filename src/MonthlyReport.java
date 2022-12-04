@@ -5,11 +5,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MonthlyReport {
-    boolean flag = false;
     HashMap<Integer, ArrayList<MonthData>> months = new HashMap<>(); // months -> int monthNumber + ArrayList<Month> monthData
 
     public void loadFile(int monthNumber, String path) {
-        flag = true;
         ArrayList<MonthData> monthData = new ArrayList<>();
         String content = readFileContentsOrNull(path);
         String[] lines = content.split("\r?\n");

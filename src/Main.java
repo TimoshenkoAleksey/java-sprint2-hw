@@ -6,6 +6,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         MonthlyReport monthlyReport = new MonthlyReport();
         YearlyReport yearlyReport = new YearlyReport();
+        Checker checker = new Checker();
 
         while (true) {
             printMenu();
@@ -17,17 +18,19 @@ public class Main {
             } else if (command == 2) {
                 yearlyReport.loadFile(2021, "resources/y.2021.csv");
             } else if (command == 3) {
-                if (monthlyReport.flag == true && yearlyReport.flag == true)
-                    new Checker(monthlyReport, yearlyReport);
-                else System.out.println("Для сверки отчетов необходимо сначала считать годовой и месячные отчеты.");
+                if (!(monthlyReport.months.isEmpty() || yearlyReport.years.isEmpty())) {
+                    checker.check(monthlyReport, yearlyReport);
+                } else System.out.println("Для сверки отчетов необходимо сначала считать годовой и месячные отчеты.");
             } else if (command == 4) {
-                if (monthlyReport.flag == true)
+                if (monthlyReport.months.isEmpty())
+                    System.out.println("Для вывода информации необходимо сначала считать месячные отчеты.");
+                else
                     monthlyReport.printMonthStatistic();
-                else System.out.println("Для вывода информации необходимо сначала считать месячные отчеты.");
             } else if (command == 5) {
-                if (yearlyReport.flag == true)
+                if (yearlyReport.years.isEmpty())
+                    System.out.println("Для вывода информации необходимо сначала считать годовой отчет.");
+                else
                     yearlyReport.printYearStatistic(2021);
-                else System.out.println("Для вывода информации необходимо сначала считать годовой отчет.");
             } else if (command == 0) {
                 break;
             } else

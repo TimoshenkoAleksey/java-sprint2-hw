@@ -5,11 +5,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class YearlyReport {
-    boolean flag = false;
     HashMap<Integer, ArrayList<YearData>> years = new HashMap<>();
 
     public void loadFile(int yearNumber, String path) {
-        flag = true;
         ArrayList<YearData> yearData = new ArrayList<>();
         String content = readFileContentsOrNull(path);
         String[] lines = content.split("\r?\n");

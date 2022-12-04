@@ -2,20 +2,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Checker {
-    public MonthlyReport monthlyReport;
-    public YearlyReport yearlyReport;
     HashMap<Integer, Integer> monthlyIncome = new HashMap<>();
     HashMap<Integer, Integer> monthlyExpenses = new HashMap<>();
     HashMap<Integer, Integer> yearlyIncome = new HashMap<>();
     HashMap<Integer, Integer> yearlyExpenses = new HashMap<>();
 
-    public Checker(MonthlyReport monthlyReport, YearlyReport yearlyReport) {
-        this.monthlyReport = monthlyReport;
-        this.yearlyReport = yearlyReport;
-        check();
-    }
-
-    public void fillDataByMonth() {
+    private void fillDataByMonth(MonthlyReport monthlyReport, YearlyReport yearlyReport) {
         for (Integer monthNumber : monthlyReport.months.keySet()) {
             ArrayList<MonthData> monthData = monthlyReport.months.get(monthNumber); // MonthData(itemName, isExpense, quantity, unitPrice)
             for (MonthData monthDatum : monthData) {
@@ -40,8 +32,8 @@ public class Checker {
         }
     }
 
-    public void check() {
-        fillDataByMonth();
+    public void check(MonthlyReport monthlyReport, YearlyReport yearlyReport) {
+        fillDataByMonth(monthlyReport, yearlyReport);
         boolean isTrueComparison = true;
         for (Integer monthNumber : monthlyIncome.keySet()) {
             if (!monthlyIncome.get(monthNumber).equals(yearlyIncome.get(monthNumber))) {
